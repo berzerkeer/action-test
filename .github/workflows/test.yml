@@ -18,6 +18,7 @@ jobs:
           CLIENT_BUILD_PATH: "${{ env.AIRGAP_ENABLED == 'true' && 'app/client/build_airgap' || 'app/client/build' }}"
       - name: Log environment variables
         run: |
+          echo "AIRGAP_ENABLED=${AIRGAP_ENABLED}"
           echo "CLIENT_BUILD_NAME=${CLIENT_BUILD_NAME}"
           echo "CLIENT_BUILD_PATH=${CLIENT_BUILD_PATH}"
 
