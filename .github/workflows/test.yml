@@ -10,15 +10,19 @@ jobs:
   test-actions:
     runs-on: ubuntu-latest
     steps:
-      - name: Set env variables
+      - name: Set up job
         uses: actions/checkout@v2
-        env:
-          AIRGAP_ENABLED: 'true'
-          CLIENT_BUILD_NAME: "${{ env.AIRGAP_ENABLED == 'true' && 'client-build-airgap' || 'client-build' }}"
-          CLIENT_BUILD_PATH: "${{ env.AIRGAP_ENABLED == 'true' && 'app/client/build_airgap' || 'app/client/build' }}"
+      - name: Set Env vars
+        run: |
+         if [[ '${{ inputs.airgap-enabled }}' == true ]]; then
+          echo 'client_build_name=client-build-airgap' >> "$GITHUB_ENV"
+          echo 'client_build_path=app/client/build_airgap' >> "$GITHUB_ENV"
+         else
+          echo 'client_build_name=client-build-airgap' >> "$GITHUB_ENV"
+          echo 'client_build_path=app/client/build_airgap' >> "$GITHUB_ENV"
+          fi
       - name: Log environment variables
         run: |
-          echo "AIRGAP_ENABLED=${{ env.AIRGAP_ENABLED }}"
-          echo "CLIENT_BUILD_NAME=${{ env.CLIENT_BUILD_NAME }}"
-          echo "CLIENT_BUILD_PATH=${{ env.CLIENT_BUILD_PATH }}"
+          echo "client_build_name: ${{ env.client_build_name }}"
+          echo "client_build_path: ${{ env.client_build_path }}"
 
