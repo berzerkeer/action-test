@@ -4,11 +4,7 @@ on:
   push:
     branches:
       - main
-inputs:
-  airgap-enabled:
-    description: 'Enable airgap build'
-    required: false
-    default: 'false'
+
 
 jobs:
   test-actions:
@@ -17,8 +13,9 @@ jobs:
       - name: Set env variables
         uses: actions/checkout@v2
         env:
-          CLIENT_BUILD_NAME: "${{ inputs.airgap-enabled == 'true' && 'client-build-airgap' || 'client-build' }}"
-          CLIENT_BUILD_PATH: "${{ inputs.airgap-enabled == 'true' && 'app/client/build_airgap' || 'app/client/build' }}"
+          AIRGAP_ENABLED: 'true'
+          CLIENT_BUILD_NAME: "${{ env.AIRGAP_ENABLED == 'true' && 'client-build-airgap' || 'client-build' }}"
+          CLIENT_BUILD_PATH: "${{ env.AIRGAP_ENABLED == 'true' && 'app/client/build_airgap' || 'app/client/build' }}"
       - name: Log environment variables
         run: |
           echo "CLIENT_BUILD_NAME=${CLIENT_BUILD_NAME}"
