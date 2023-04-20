@@ -1,8 +1,14 @@
+# Use GitHub Actions version 2.1
 name: 'test'
 on:
   push:
     branches:
       - main
+inputs:
+  airgap-enabled:
+    description: 'Enable airgap build'
+    required: false
+    default: 'false'
 
 jobs:
   test-actions:
