@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   test-actions:
     runs-on: ubuntu-latest
@@ -11,12 +12,7 @@ jobs:
         env:
           CLIENT_BUILD_NAME: "${{ inputs.airgap-enabled == 'true' && 'client-build-airgap' || 'client-build' }}"
           CLIENT_BUILD_PATH: "${{ inputs.airgap-enabled == 'true' && 'app/client/build_airgap' || 'app/client/build' }}"
-        - name: Log Environment Variables
           run: |
             echo "CLIENT_BUILD_NAME=${CLIENT_BUILD_NAME}"
             echo "CLIENT_BUILD_PATH=${CLIENT_BUILD_PATH}"
-        inputs:
-          airgap-enabled:
-            description: 'Enable airgap mode for client build'
-            required: true
-            default: 'false'
+
