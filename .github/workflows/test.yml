@@ -1,0 +1,13 @@
+name: 'test'
+on:
+  push:
+    branches:
+      - main
+jobs:
+  test-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        env:
+          CLIENT_BUILD_NAME: "${{ inputs.airgap-enabled == 'true' && 'client-build-airgap' || 'client-build' }}"
+          CLIENT_BUILD_PATH: "${{ inputs.airgap-enabled == 'true' && 'app/client/build_airgap' || 'app/client/build' }}"
