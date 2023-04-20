@@ -8,11 +8,13 @@ jobs:
   test-actions:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Set env variables
+        uses: actions/checkout@v2
         env:
           CLIENT_BUILD_NAME: "${{ inputs.airgap-enabled == 'true' && 'client-build-airgap' || 'client-build' }}"
           CLIENT_BUILD_PATH: "${{ inputs.airgap-enabled == 'true' && 'app/client/build_airgap' || 'app/client/build' }}"
-          run: |
-            echo "CLIENT_BUILD_NAME=${CLIENT_BUILD_NAME}"
-            echo "CLIENT_BUILD_PATH=${CLIENT_BUILD_PATH}"
+      - name: Log environment variables
+        run: |
+          echo "CLIENT_BUILD_NAME=${CLIENT_BUILD_NAME}"
+          echo "CLIENT_BUILD_PATH=${CLIENT_BUILD_PATH}"
 
