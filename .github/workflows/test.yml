@@ -1,13 +1,17 @@
 # Use GitHub Actions version 2.1
 name: 'test'
 on:
-  push:
-    branches:
-      - main
-
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      airgap-enabled:
+        description: 'Airgap enabled'
+        required: true
+        type: string
+        default: false
 
 jobs:
-  test-actions:
+  check-workflow-syntax:
     runs-on: ubuntu-latest
     steps:
       - name: Set up job

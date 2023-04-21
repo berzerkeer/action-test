@@ -1,0 +1,19 @@
+name: Dispatches a call to trigger test
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-actions:
+    name: Test Actions
+    uses: ./.github/workflows/test.yml
+    with:
+      airgap-enabled: false
+
+  test-actions-airgap:
+    name: Test Actions Airgap
+    uses: ./.github/workflows/test.yml
+    with:
+      airgap-enabled: true
