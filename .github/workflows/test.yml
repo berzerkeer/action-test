@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Set Env vars
         run: |
-         if [[ '${{ inputs.airgap-enabled }}' == true ]]; then
+         if [[ '${{ inputs.airgap-enabled }}' == 'true' ]]; then
           echo 'client_build_name=client-build-airgap' >> "$GITHUB_ENV"
           echo 'client_build_path=app/client/build_airgap' >> "$GITHUB_ENV"
          else
