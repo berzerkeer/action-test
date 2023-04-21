@@ -10,10 +10,10 @@ jobs:
     name: Test Actions
     uses: ./.github/workflows/test.yml
     with:
-      airgap-enabled: false
+      airgap-enabled: "false"
 
   test-actions-airgap:
     name: Test Actions Airgap
     uses: ./.github/workflows/test.yml
     with:
-      airgap-enabled: true
+      airgap-enabled: "true"
