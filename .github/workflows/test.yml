@@ -37,7 +37,8 @@ jobs:
         id: airgap_vars
         run: |
           if [[ ${{steps.vars.outputs.tag}} == "ci/airgap-"* ]]; then
-            echo airgap_tag=${${{steps.vars.outputs.tag}}#*-} >> $GITHUB_OUTPUT  # Extract content after the "-"
+            echo "airgap_tag=${{ steps.vars.outputs.tag#*- }}" >> $GITHUB_ENV
+            echo "if block"
           fi
           echo "Tag: $airgap_tag, Output: ${{steps.airgap_vars.outputs.airgap_tag}} , Env: ${{env.airgap_tag}}"
           echo "Tagg:$tag, Output: ${{steps.vars.outputs.tag}} , Env: ${{env.tag}}"
