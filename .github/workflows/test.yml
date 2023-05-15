@@ -29,4 +29,16 @@ jobs:
         run: |
           echo "client_build_name: ${{ env.client_build_name }}"
           echo "client_build_path: ${{ env.client_build_path }}"
+      - name: Get the version to tag the Docker image
+        id: vars
+        run: echo tag=$(echo ${GITHUB_REF:11}) >> $GITHUB_OUTPUT
+
+      - name: Get the airgapped version tag to tag airgap docker image
+        id: airgap_vars
+        run: |
+          if [[ ${{steps.vars.outputs.tag}} == "ci/airgap-"* ]]; then
+            echo airgap_tag=${${{steps.vars.outputs.tag}}#*-} >> $GITHUB_OUTPUT  # Extract content after the "-"
+          fi
+          echo "Tag: $airgap_tag, Output: ${{steps.airgap_vars.outputs.airgap_tag}} , Env: ${{env.airgap_tag}}"
+          echo "Tagg:$tag, Output: ${{steps.vars.outputs.tag}} , Env: ${{env.tag}}"
 
