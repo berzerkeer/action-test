@@ -42,7 +42,7 @@ jobs:
           echo "Tagg:$tag, Output: ${{steps.vars.outputs.tag}} , Env: ${{env.tag}}"
 
       - name: Log airgap variables
-        if: ${{steps.airgap_vars.outputs.airgap_tag}} != ''
+        if: ${{steps.airgap_vars.outputs.airgap_tag}}
         run: |
           echo "Tag: $airgap_tag, Output: ${{steps.airgap_vars.outputs.airgap_tag}} , Env: ${{env.airgap_tag}}"
 
